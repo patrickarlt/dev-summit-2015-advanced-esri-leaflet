@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Introducing Esri Leaflet</title>
+		<title>Esri Leaflet: Advanced Topics</title>
 
-		<meta name="description" content="Talk introducing Esri Leaflet, a new series of plugins for working with ArcGIS Services in Leaflet. From the 2014 Esri International Developers Summit.">
+		<meta name="description" content="Advanced level Esri Leaflet talk cover, debugging, testing, contributing and extending Esri Leaflet.">
 		<meta name="author" content="Patrick Arlt">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,14 +16,6 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/esri.css" id="theme">
-
-		<link rel="stylesheet" href="plugin/leaflet/reveal-leaflet.css">
-		<link rel="stylesheet" href="lib/leaflet-marker-cluster/MarkerCluster.css">
-		<link rel="stylesheet" href="lib/leaflet-marker-cluster/MarkerCluster.Default.css">
-
-		<link rel="stylesheet" href="lib/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
-
-		<link rel="stylesheet" href="lib/esri-leaflet-demographics/esri-leaflet-legend.css">
 
 		<style>
 			.reveal .leaflet-popup {
@@ -65,10 +57,49 @@
 				<section class="left">
 					<h1>Esri Leaflet: Advanced Topics</h1>
 					<h3>Patrick Arlt</h3>
-					<p>Experience Developer - Esri Portland R&D Center</p>
-					<p><a href="http://twitter.com/patrickarlt">@patrickarlt</a> - <a href="http://patrickarlt.github.io/dev-summit-talk-esri-leaflet/">http://bit.ly/1qmxndx</a></p>
+					<p>Experience Developer - ArcGIS for Developers</p>
+					<p><a href="http://twitter.com/patrickarlt">@patrickarlt</a> - <a href="http://patrickarlt.github.io/dev-summit-2015-advanced-esri-leaflet/">BITLY LINK!!!!</a></p>
 				</section>
+
 			</div>
+
 		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: false,
+
+ 				// Factor of the display size that should remain empty around the content
+    		margin: 0.1,
+
+    		// Bounds for smallest/largest possible scale to apply to content
+		    minScale: 1.0,
+		    maxScale: 1.0,
+
+				theme: 'esri', // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: '/background.jpg',
+				// parallaxBackgroundSize: '2193px 1334px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
 	</body>
 </html>
