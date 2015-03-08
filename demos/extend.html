@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Esri Leaflet Quickstart</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
+  <script src="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+
+  <style>
+    body {margin:0;padding:0;}
+    #map {position: absolute;top:0;bottom:0;right:0;left:0;}
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var map = L.map("map").setView([37.75, -122.23], 10);
+  L.esri.basemapLayer("Topographic").addTo(map);
+
+  var RouteTask = L.esri.Tasks.Task.extend({
+    start: function(latlng) {
+      latlng = L.latLng(latlng);
+      this._start = ([latlng.lng, latlng.lat]).join(',') + ";";
+      return this;
+    },
+    end: function(latlng) {
+      latlng = L.latLng(latlng);
+      this._end = ([latlng.lng, latlng.lat]).join(',') + ";";
+      return this;
+    },
+    run: function(callback, context){
+      this.params.stops = this._start + this._end;
+      return this.request(function(error, response){
+        var geojson = (response && response.routes) ? L.esri.Util.responseToFeatureCollection(route) : {};
+        callback.call(this, error, geojson, response);
+      });
+    }
+  });
+
+  var RouteService = L.esri.Services.Service.extend({
+    route: function(){
+      return new RouteTask(this);
+    }
+  });
+
+  var routeService = new RouteService({
+    url: "http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World/solve",
+    token: "H9NEX7t19msUZmosNLS8sZJBmHJ1w9RG6dZXcYNdrDtPhSiVtaZjwuM1Qn6UZMI3BWIHReHSeMmCFTr-AosP_muP-6zbU1BlYSQkLBlJecTfo32xLN9uQgpucMJftnQWep-VznIl5b0ZhZf_uB2c1Q.."
+  });
+
+  map.on("click", function(e){
+    routeService.route().start(map.getCenter()).end(e.latlng).run(function(error, route, response){
+      L.geoJson(route).addTo(map);
+    });
+  });
+
+</script>
+
+</body>
+</html>
